@@ -2,14 +2,15 @@
     mustDeps : { block : 'i-bem', elems : 'dom' },
     shouldDeps : [
         {elems: ['additional','form']},
-        'button',
+        {block: 'button',mods : { theme : 'islands', size : 'm', view : 'action' }},
         'spin',
         'insert',
         'white-form',
         {block: 'insert', mods:{type: 'link'}},
         {block: 'insert', mods:{type: 'tube'}},
         {block: 'insert', mods:{type: 'image'}},
-        {block: 'material-card'}
+        {block: 'material-card'},
+        'maxim-popup'
     ]
 },
     {
@@ -19,7 +20,8 @@
             { tech : 'bh', block : 'button' },
             { block: 'button' },
             { tech : 'bh', block : 'spin'},
-            { tech : 'bemhtml', block : 'spin'}
+            { tech : 'bemhtml', block : 'spin'},
+            {block: 'maxim-popup'}
         ]
     },
     {
@@ -55,5 +57,18 @@
         shouldDeps: {
             tech: 'bh'
         }
+    },
+    {
+        block: 'maxim-popup',
+        tech: 'js',
+        shouldDeps: {
+            tech: 'bh'
+        }
+    },
+    {
+        block: 'button',
+        mods: {theme: 'islands', size: 'm', view: 'action'},
+        text: 'Add images',
+        tech: 'bh'
     }
 ]
