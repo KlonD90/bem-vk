@@ -7,7 +7,10 @@
         { elem : 'meta', attrs : { name : 'viewport', content : 'width=device-width, initial-scale=1' } },
         { elem : 'css', url : '_index.css' }
     ],
-    scripts: [{ elem : 'js', url : '_index.js' }],
+    scripts: [
+        //{ elem : 'js', url : 'http://yastatic.net/bh/3.2.1/bh.min.js' },
+        { elem : 'js', url : '_index.js' }
+    ],
     mods : { theme : 'islands' },
     content: [
         {
@@ -15,7 +18,7 @@
             content: [
                 {
                     block: 'post-form',
-                    js: { controller: 'localhost:4444//addPost' }
+                    js: { controller: 'http://localhost:4444/addPost' }
                 },
                 {
                     block: 'feed',

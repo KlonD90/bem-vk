@@ -4,8 +4,8 @@
 
 modules.define(
     'post-form',
-    ['i-bem__dom', 'jquery', 'dom', 'button'],
-    function(provide, BEMDOM, $, dom, Button) {
+    ['i-bem__dom', 'jquery', 'dom', 'button','bh'],
+    function(provide, BEMDOM, $, dom, Button, BH) {
         var expression = /[-a-zA-Z0-9@:%_\+.~#?&//=]{2,256}\.[a-z]{2,4}\b(\/[-a-zA-Z0-9@:%_\+.~#?&//=]*)?/i;
         var httpRegex = new RegExp(expression);
         /**
@@ -90,15 +90,19 @@ modules.define(
                         url: link,
                         action: 'urlInfo'
                     },
-                    dataType: 'json',
-                    type: 'post',
+                    dataType: 'jsonp',
+                    type: 'get',
                     success: (function(data){
                         this.spin.setMod('visible', false);
-                        this.findBlockInside('insert','type','link');
+                        //this.findBlockInside('insert','type','link');
+                        modules.require(['bh'], (function(BH){
+                            $(this.elem('additional')[0]).append(BH.apply({block: 'material-card', data: data }));
+                        }).bind(this));
+                        console.log(data);
                     }).bind(this),
                     error: (function(){
                         this.spin.setMod('visible', false);
-                        this.findBlockInside('error').text('Не удалось достать данные по ссылке '+link);
+                        this.findBlockInside('error').innerHTML = 'Не удалось достать данные по ссылке '+link;
                     }).bind(this)
                 });
                 this.spin.setMod('visible', true);

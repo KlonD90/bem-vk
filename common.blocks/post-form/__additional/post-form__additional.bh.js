@@ -11,10 +11,6 @@ module.exports = function(bh) {
             },
             {
                 block: 'insert',
-                type: 'link'
-            },
-            {
-                block: 'insert',
                 type: 'video'
             },
             {

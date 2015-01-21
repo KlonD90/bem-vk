@@ -19,7 +19,7 @@ var techs = {
 
         // bh
         bh: require('enb-bh/techs/bh-server'),
-        bhClient: require('enb-bh/techs/bh-client'),
+        bhClient: require('enb-bh/techs/bh-client-module'),
         htmlFromBemjson: require('enb-bh/techs/html-from-bemjson')
     },
     enbBemTechs = require('enb-bem-techs'),
