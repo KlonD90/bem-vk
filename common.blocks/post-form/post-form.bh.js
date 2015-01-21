@@ -10,7 +10,8 @@ module.exports = function(bh) {
             {
                 block : 'button',
                 mods : { theme : 'islands', size : 'm', view : 'action' },
-                text : 'Add post'
+                text : 'Add post',
+                js: { func: 'post'}
             }
         ], true);
     });

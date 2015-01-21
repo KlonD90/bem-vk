@@ -107,6 +107,22 @@ modules.define(
                 });
                 this.spin.setMod('visible', true);
             }
+        },{
+            live: function(){
+                this.liveInitOnBlockInsideEvent('click', 'button', this.onButtonClick);
+                //return this.__base.apply(this, arguments);
+            },
+            onButtonClick: function(e){
+                console.log(e.target.params.func);
+                switch(e.target.params.func){
+                    case 'video':
+                        $('body').append(BH.apply({block: 'popup',content:'ETO POPUP'}));
+                        break;
+                    case 'image':
+                        break;
+                    case 'post':
+                        break;
+                }
+            }
         }));
-
     });

@@ -10,12 +10,22 @@ module.exports = function(bh) {
                 block: 'error'
             },
             {
-                block: 'insert',
-                type: 'video'
+                elem: 'add-video',
+                content: [{
+                    block: 'button',
+                    mods: {theme: 'islands', size: 'm', view: 'action'},
+                    text: 'Add video',
+                    js: {func: 'video'}
+                }]
             },
             {
-                block: 'insert',
-                type: 'image'
+                elem: 'add-images',
+                content: [{
+                    block: 'button',
+                    mods: {theme: 'islands', size: 'm', view: 'action'},
+                    text: 'Add images',
+                    js: {func: 'images'}
+                }]
             }
         ], true);
     });
