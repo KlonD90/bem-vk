@@ -5,6 +5,7 @@
         'button',
         'spin',
         'insert',
+        'white-form',
         {block: 'insert', mods:{type: 'link'}},
         {block: 'insert', mods:{type: 'tube'}},
         {block: 'insert', mods:{type: 'image'}},
@@ -43,6 +44,13 @@
     },
     {
         block: 'post-form',
+        tech: 'js',
+        shouldDeps: {
+            tech: 'bh'
+        }
+    },
+    {
+        block: 'white-form',
         tech: 'js',
         shouldDeps: {
             tech: 'bh'

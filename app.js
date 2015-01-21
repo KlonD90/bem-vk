@@ -18,7 +18,10 @@ app.get('/addPost',urlEncodedParser, function(req, res){
     switch(req.query.action)
     {
         case 'urlInfo':
-            request({url: req.query.url, encoding: null}, function(err, destinationResponse, body){
+            var checkUrl = req.query.url;
+            if(checkUrl.substr(0,4)!='http')
+                checkUrl = 'http://'+req.query.url;
+            request({url: checkUrl, encoding: null}, function(err, destinationResponse, body){
                 if (err){
                     if (req.query.callback){
                         return res.status(404).json({
@@ -59,7 +62,7 @@ app.get('/addPost',urlEncodedParser, function(req, res){
                     title: title,
                     description: description,
                     img: img,
-                    link: req.query.url
+                    link: checkUrl
                 };
                 if (req.query.callback)
                     res
