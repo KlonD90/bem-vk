@@ -5,28 +5,15 @@
 modules.define(
     'post-form',
     ['i-bem__dom', 'jquery', 'dom', 'button','bh'],
-    function(provide, BEMDOM, $, dom, Button, BH) {
+    function(provide, BEMDOM, $, dom, Button, BH, popup) {
         var expression = /[-a-zA-Z0-9@:%_\+.~#?&//=]{2,256}\.[a-z]{2,4}\b(\/[-a-zA-Z0-9@:%_\+.~#?&//=]*)?/i;
         var httpRegex = new RegExp(expression);
         /**
          * @exports
          * @class post-form
-         * @augments control
          * @bem
          */
         provide(BEMDOM.decl({ block : this.name}, /** @lends post-form.prototype */{
-            beforeSetMod : {
-                'pressed' : {
-                    'true' : function() {
-                        return !this.hasMod('disabled') || this.hasMod('togglable');
-                    }
-                },
-                'focused' : {
-                    '' : function() {
-                        return !this._isPointerPressInProgress;
-                    }
-                }
-            },
             onSetMod : {
                 'js' : {
                     'inited' : function() {
@@ -110,13 +97,22 @@ modules.define(
         },{
             live: function(){
                 this.liveInitOnBlockInsideEvent('click', 'button', this.onButtonClick);
+                return false;
                 //return this.__base.apply(this, arguments);
             },
             onButtonClick: function(e){
                 console.log(e.target.params.func);
                 switch(e.target.params.func){
                     case 'video':
-                        $('body').append(BH.apply({block: 'popup',content:'ETO POPUP'}));
+                        modules.require(['i-maxim-popup'], function(popup){
+                            popup({
+                                block: 'white-form',
+                                content: [{
+                                    block: 'post-video-form',
+                                    js: {controller: 'http://localhost:4444/addPost'}
+                                }]
+                            }, true);
+                        });
                         break;
                     case 'image':
                         break;

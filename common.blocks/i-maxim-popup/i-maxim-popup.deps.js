@@ -1,3 +1,18 @@
-/**
- * Created by nikolaymendyaev on 21.01.15.
- */
+[
+    {
+        block: 'maxim-popup',
+        tech: 'js',
+        shouldDeps: {
+            tech: 'bh'
+        }
+    },
+    {
+        block: 'maxim-popup'
+    },
+    {
+        block: 'i-bem'
+    },
+    {
+        block: 'jquery'
+    }
+]

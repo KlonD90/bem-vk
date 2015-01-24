@@ -1,5 +1,5 @@
 module.exports = function(bh) {
-    bh.match('popup', function(ctx, json) {
+    bh.match('maxim-popup', function(ctx, json) {
         ctx.content([
             {
                 elem: 'wrap',

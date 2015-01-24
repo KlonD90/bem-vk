@@ -5,12 +5,14 @@
         {block: 'button',mods : { theme : 'islands', size : 'm', view : 'action' }},
         'spin',
         'insert',
-        'white-form',
+        'white-blank',
         {block: 'insert', mods:{type: 'link'}},
         {block: 'insert', mods:{type: 'tube'}},
         {block: 'insert', mods:{type: 'image'}},
         {block: 'material-card'},
-        'maxim-popup'
+        'maxim-popup',
+        'i-maxim-popup',
+        'post-video-form'
     ]
 },
     {
@@ -21,7 +23,8 @@
             { block: 'button' },
             { tech : 'bh', block : 'spin'},
             { tech : 'bemhtml', block : 'spin'},
-            {block: 'maxim-popup'}
+            {block: 'maxim-popup'},
+            {block: 'post-video-form'}
         ]
     },
     {
@@ -52,14 +55,14 @@
         }
     },
     {
-        block: 'white-form',
+        block: 'maxim-popup',
         tech: 'js',
         shouldDeps: {
             tech: 'bh'
         }
     },
     {
-        block: 'maxim-popup',
+        block: 'post-video-form',
         tech: 'js',
         shouldDeps: {
             tech: 'bh'
@@ -68,7 +71,11 @@
     {
         block: 'button',
         mods: {theme: 'islands', size: 'm', view: 'action'},
-        text: 'Add images',
+        tech: 'Add images',
         tech: 'bh'
+    },
+    {
+        block: 'post-video-form',
+        tech: 'js'
     }
 ]

@@ -1,4 +1,4 @@
-.popup
+.maxim-popup
     background: e("url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiA/Pgo8c3ZnIHhtbG5zPSJodâ€¦BoZWlnaHQ9IjEiIGZpbGw9InVybCgjZ3JhZC11Y2dnLWdlbmVyYXRlZCkiIC8+Cjwvc3ZnPg==)");
     background: -moz-linear-gradient(left, rgba(0, 0, 0, 0.8) 0%, rgba(0, 0, 0, 0.8) 100%);
     background: -webkit-gradient(linear, left top, right top, color-stop(0%, rgba(0, 0, 0, 0.8)), color-stop(100%, rgba(0, 0, 0, 0.8)));
@@ -14,18 +14,21 @@
     top: 0;
     width: 100%;
     z-index: 10000;
-.popup__wrap
+    display none
+.maxim-popup__wrap
     display: table;
     height: 100%;
     position: relative;
     text-align: center;
     vertical-align: middle;
     width: 100%;
-.popup__container
+.maxim-popup__container
     display: table-cell;
     position: relative;
     text-align: center;
     vertical-align: middle;
-.popup__center
+.maxim-popup__center
     display: inline-block;
     position: relative;
+.maxim-popup_visible
+    display block
