@@ -12,27 +12,30 @@ modules.define(
          * @augments control
          * @bem
          */
-        provide(function(data, isBemJson){
-            if (!BEM.blocks['maxim-popup'].popup)
+        var curPopup = null;
+        provide(function(data, isBemJson, outClose){
+            outClose = outClose || true;
+            if (!curPopup)
             {
                 var bemJson = {
                     block: 'maxim-popup',
-                    mods: {visible: true},
-                    js: {outClose: true}
+                    mods: {visible: true}
                 };
                 if (isBemJson)
                     bemJson.content = data;
                 var html =  $(BH.apply(bemJson));
                 $('body').append(html);
                 BEMDOM.init(html);
+                curPopup = html.bem('maxim-popup');
+                curPopup.params.outClose = outClose;
             }
             else
             {
                 var content = data;
                 if (isBemJson)
                     var content = $(BH.apply(data));
-                BEM.blocks['maxim-popup'].popup.show();
-                BEM.blocks['maxim-popup'].popup.setContent(content);
+                curPopup.show();
+                curPopup.setContent(content);
             }
         });
     });
