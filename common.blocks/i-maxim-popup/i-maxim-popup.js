@@ -4,8 +4,8 @@
 
 modules.define(
     'i-maxim-popup',
-    ['i-bem', 'i-bem__dom', 'jquery', 'dom','bh', 'maxim-popup'],
-    function(provide, BEM, BEMDOM, $, dom, BH, MaximPopup) {
+    ['i-bem__dom', 'jquery', 'bh', 'maxim-popup'],
+    function(provide, BEMDOM, $, BH, MaximPopup) {
         /**
          * @exports
          * @class post-video-form
@@ -33,7 +33,7 @@ modules.define(
             {
                 var content = data;
                 if (isBemJson)
-                    var content = $(BH.apply(data));
+                    content = $(BH.apply(data));
                 curPopup.show();
                 curPopup.setContent(content);
             }

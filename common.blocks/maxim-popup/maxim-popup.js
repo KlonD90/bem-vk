@@ -16,18 +16,15 @@ modules.define(
             onSetMod : {
                 'js' : {
                     'inited' : function() {
-                        //this.__self.popup = this;
-                        //this.liveInitOnBlockInsideEvent('closePopup', this.close);
-                        this.on(this.domElem, 'closePopup', this._onClose, this);
+                        this.on(this.domElem, 'closePopup', this.close, this);
                         this.bindOutClick = this.outClickCheck.bind(this);
-                        $(this.domElem).find('.maxim-popup__center').on('click', this.intoClickCheck);
+                        this.container = $('.maxim-popup__center').eq(0);
+                        this.container.on('click', this.intoClickCheck);
                         $('body').on('click', this.bindOutClick);
-                        //this.isInit = true;
                     }
                 },
                 'visible' : {
                     'true': function(){
-                        this.isInit = true;
                         $('body').on('click', this.bindOutClick);
                     },
                     '' : function(){
@@ -35,18 +32,13 @@ modules.define(
                     }
                 }
             },
-            _onClose: function(){
-                this.delMod('visible');
-            },
             setContent: function(content){
-                BEMDOM.update($(this.domElem).find('.maxim-popup__center'), content);
+                BEMDOM.update(this.container, content);
             },
             intoClickCheck: function(e){
                 e.originalEvent.isPopup = true;
             },
             outClickCheck: function(e){
-                //if (this.isInit)
-                //    return this.isInit = false;
                 if (!e.originalEvent.isPopup && this.params.outClose)
                     this.close();
             },
@@ -56,6 +48,5 @@ modules.define(
             close: function(){
                 this.delMod('visible');
             }
-        },{
         }));
     });
