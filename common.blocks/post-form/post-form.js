@@ -81,15 +81,16 @@ modules.define(
                     type: 'get',
                     success: (function(data){
                         this.spin.setMod('visible', false);
-                        //this.findBlockInside('insert','type','link');
                         modules.require(['bh'], (function(BH){
                             $(this.elem('additional')[0]).append(BH.apply({block: 'material-card', data: data }));
                         }).bind(this));
-                        console.log(data);
                     }).bind(this),
                     error: (function(){
                         this.spin.setMod('visible', false);
-                        this.findBlockInside('error').innerHTML = 'Не удалось достать данные по ссылке '+link;
+                        var error = this.findBlockInside('error');
+                        error.setMod('visible', true);
+                        error.domElem.text('Не удалось достать данные по ссылке '+link);
+                        this.additional.link = false;
                     }).bind(this)
                 });
                 this.spin.setMod('visible', true);
