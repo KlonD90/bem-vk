@@ -18,8 +18,13 @@ app.get('/addPost',urlEncodedParser, function(req, res){
     switch(req.query.action)
     {
         case 'urlInfo':
+            if (!req.query.url)
+                return void res.status(404).json({
+                    code: 'error'
+                });
             var checkUrl = req.query.url;
-            if(checkUrl.substr(0,4)!='http')
+            console.log(checkUrl);
+            if (checkUrl.substr(0,4)!='http')
                 checkUrl = 'http://'+req.query.url;
             request({url: checkUrl, encoding: null}, function(err, destinationResponse, body){
                 if (err){
@@ -48,6 +53,7 @@ app.get('/addPost',urlEncodedParser, function(req, res){
                 }
                 var title = $('title').text();
                 var img = null;
+                var images = null;
                 if ($('link[rel="image_src"]').length)
                     img = $('link[rel="image_src"]').attr('href');
                 else
@@ -55,14 +61,35 @@ app.get('/addPost',urlEncodedParser, function(req, res){
                     if($('meta[name="og:image"],meta[property="og:image"]').length)
                         img = $('meta[name="og:image"],meta[property="og:image"]').attr('content');
                 }
-                var description = $('meta[name="Description"],meta[name="description"]')
+                var description = $('meta[name="Description"],meta[name="description"],meta[property="og:description"]')
                     .attr('content');
+                if (!img)
+                {
+                    images = [];
+                    var urlObj = new URL(checkUrl);
+                    $('img').each(function(){
+                        var src = $(this).attr('src');
+                        if (src.substr(0,1) == '/')
+                        {
+                            src = urlObj.protocol+'//'+urlObj.hostname+src;
+                        }
+                        if (src.substr(0,4)!='http'){
+                            if (checkUrl.substr(-1)!='/')
+                                urlObj.protocol+'//'+urlObj.hostname+src
+                            else
+                                src = checkUrl+src;
+                        }
+                        images.push($(this).attr('src'));
+                    });
+                }
+                console.log(images);
                 var answer = {
                     code: 'ok',
                     title: title,
                     description: description,
                     img: img,
-                    link: checkUrl
+                    link: checkUrl,
+                    images: images
                 };
                 if (req.query.callback)
                     res
@@ -75,4 +102,13 @@ app.get('/addPost',urlEncodedParser, function(req, res){
         default:
             break;
     }
+});
+
+app.get('/proxy', urlEncodedParser, function(req, res){
+    var checkUrl = req.query.url;
+    if (checkUrl)
+        return void res.json({code:'error'});
+    if (checkUrl.substr(0,4)!='http')
+        checkUrl = 'http://'+checkUrl;
+    request(req.query.url).pipe(res);
 });
